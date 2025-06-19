@@ -13,7 +13,10 @@ apt install -y \
     fdisk \
     g++-aarch64-linux-gnu \
     gcc-aarch64-linux-gnu \
+    g++-arm-linux-gnueabihf \
+    gcc-arm-linux-gnueabihf \ 
     gcc-arm-none-eabi \
+    binutils-arm-linux-gnueabihf \
     libtool \
     make \
     pkg-config \

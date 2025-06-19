@@ -2,8 +2,8 @@
 
 export CHROOT=${CHROOT=$(pwd)/rootfs}
 export HOST_NAME=${HOST_NAME=openstick-alpine}
-export RELEASE=${RELEASE=v3.20}
-export PMOS_RELEASE=${PMOS_RELEASE=v24.06}
+export RELEASE=${RELEASE=v3.22}
+export PMOS_RELEASE=${PMOS_RELEASE=v25.06}
 export MIRROR=${MIRROR=http://dl-cdn.alpinelinux.org/alpine}
 export PMOS_MIRROR=${PMOS_MIRROR=http://mirror.postmarketos.org/postmarketos}
 
@@ -19,12 +19,12 @@ EOF
 cp /etc/resolv.conf ${CHROOT}/etc/
 
 mkdir -p ${CHROOT}/usr/bin
-cp $(which qemu-aarch64-static) ${CHROOT}/usr/bin
+cp $(which qemu-armhf-static) ${CHROOT}/usr/bin
 
-wget https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/v2.12.14/x86_64/apk.static
+wget https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/v2.14.9/x86_64/apk.static
 chmod a+x apk.static
 
-./apk.static add -p ${CHROOT} --initdb -U --arch aarch64 --allow-untrusted alpine-base
+./apk.static add -p ${CHROOT} --initdb -U --arch armv7 --allow-untrusted alpine-base
 rm apk.static
 
 # install apps
@@ -117,5 +117,5 @@ cp -a configs/templates ${CHROOT}/etc/gt
 # backup rootfs
 tar cpzf alpine_rootfs.tgz \
     --exclude="root/*" \
-    --exclude="usr/bin/qemu-aarch64-static" \
+    --exclude="usr/bin/qemu-armhf-static" \
     -C rootfs .

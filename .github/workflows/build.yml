@@ -33,5 +33,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: openstick-debian
+          name: uz801-debian
           path: files/*

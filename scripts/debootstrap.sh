@@ -61,6 +61,8 @@ wget -O - http://mirror.postmarketos.org/postmarketos/v24.06/armv7/linux-postmar
 mkdir -p ${CHROOT}/boot/extlinux
 cp configs/extlinux.conf ${CHROOT}/boot/extlinux
 
+mkdir -p "${CHROOT}/boot/dtbs/qcom"
+
 # copy custom dtb's
 cp dtbs/* ${CHROOT}/boot/dtbs/qcom
 

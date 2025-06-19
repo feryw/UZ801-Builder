@@ -7,6 +7,9 @@ apt install -y \
     device-tree-compiler \
     fdisk \
     gcc-aarch64-linux-gnu \
+    g++-arm-linux-gnueabihf \
+    gcc-arm-linux-gnueabihf \
+    binutils-arm-linux-gnueabihf \
     gcc-arm-none-eabi \
     make \
     python3-cryptography \
@@ -14,4 +17,4 @@ apt install -y \
     python3-pycryptodome \
     qemu-user-static \
     unzip \
-    wget 
+    wget

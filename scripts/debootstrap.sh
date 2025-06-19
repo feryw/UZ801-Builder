@@ -2,16 +2,16 @@
 
 CHROOT=${CHROOT=$(pwd)/rootfs}
 RELEASE=${RELEASE=stable}
-HOST_NAME=${HOST_NAME=openstick-debian}
+HOST_NAME=${HOST_NAME=uz801-debian}
 
 rm -rf ${CHROOT}
 
-debootstrap --foreign --arch arm64 \
+debootstrap --foreign --arch armhf \
     --keyring /usr/share/keyrings/debian-archive-keyring.gpg ${RELEASE} ${CHROOT}
 
-cp $(which qemu-aarch64-static) ${CHROOT}/usr/bin
+cp $(which qemu-armhf-static) ${CHROOT}/usr/bin
 
-chroot ${CHROOT} qemu-aarch64-static /bin/bash /debootstrap/debootstrap --second-stage
+chroot ${CHROOT} qemu-armhf-static /bin/bash /debootstrap/debootstrap --second-stage
 
 cat << EOF > ${CHROOT}/etc/apt/sources.list
 deb http://deb.debian.org/debian ${RELEASE} main contrib non-free-firmware
@@ -26,7 +26,7 @@ mount -o bind /dev/pts/ ${CHROOT}/dev/pts/
 mount -o bind /run ${CHROOT}/run/
 
 cp scripts/setup.sh ${CHROOT}
-chroot ${CHROOT} qemu-aarch64-static /bin/sh -c /setup.sh
+chroot ${CHROOT} qemu-armhf-static /bin/sh -c /setup.sh
 
 # cleanup
 for a in proc sys dev/pts dev run; do
@@ -71,4 +71,4 @@ mkdir -p ${CHROOT}/lib/firmware/msm-firmware-loader
 echo "PARTUUID=80780b1d-0fe1-27d3-23e4-9244e62f8c46\t/boot\text2\tdefaults\t0 2" > ${CHROOT}/etc/fstab
 
 # backup rootfs
-tar cpzf rootfs.tgz --exclude="usr/bin/qemu-aarch64-static" -C rootfs .
+tar cpzf rootfs.tgz --exclude="usr/bin/qemu-armhf-static" -C rootfs .

@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 export CHROOT=${CHROOT=$(pwd)/rootfs}
-export HOST_NAME=${HOST_NAME=openstick-alpine}
+export HOST_NAME=${HOST_NAME=uz801-alpine}
 export RELEASE=${RELEASE=v3.22}
 export PMOS_RELEASE=${PMOS_RELEASE=v25.06}
 export MIRROR=${MIRROR=http://dl-cdn.alpinelinux.org/alpine}

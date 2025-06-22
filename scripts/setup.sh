@@ -17,6 +17,9 @@ apt install -qqy --no-install-recommends \
     dnsmasq \
     hostapd \
     iptables \
+    nftables \
+    htop \
+    nano \
     libconfig9 \
     locales \
     modemmanager \
@@ -36,5 +39,5 @@ rm -rf /var/lib/apt/lists/*
 
 passwd -d root
 
-echo user:1::::/home/user:/bin/bash | newusers
+echo wyref:1::::/home/user:/bin/bash | newusers
 echo 'user ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/user

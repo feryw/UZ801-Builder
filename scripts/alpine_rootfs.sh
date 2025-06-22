@@ -85,7 +85,7 @@ rc-update add dropbear default
 rc-update add rmtfs default
 rc-update add modemmanager default
 rc-update add networkmanager default
-rc-update add chrony default
+rc-update add chronyd default
 "
 echo 'user ALL=(ALL:ALL) NOPASSWD: ALL' > ${CHROOT}/etc/sudoers.d/user
 

@@ -56,7 +56,11 @@ apk add --no-cache \
     shadow \
     nftables \
     hostapd \
-    wireless-tools
+    wireless-tools \
+    bash \
+    fastfetch \
+    iftop
+    
 "
 # setup alpine
 chroot ${CHROOT} ash -l -c "
@@ -81,6 +85,7 @@ rc-update add dropbear default
 rc-update add rmtfs default
 rc-update add modemmanager default
 rc-update add networkmanager default
+rc-update add chrony default
 "
 echo 'user ALL=(ALL:ALL) NOPASSWD: ALL' > ${CHROOT}/etc/sudoers.d/user
 

@@ -64,7 +64,7 @@ apk add --no-cache \
 "
 # setup alpine
 chroot ${CHROOT} ash -l -c "
-echo user:1::::/home/user:/bin/ash | newusers
+echo wyref:1::::/home/user:/bin/ash | newusers
 apk del shadow
 
 rc-update add devfs sysinit

@@ -57,6 +57,7 @@ apk add --no-cache \
     nftables \
     hostapd \
     wireless-tools \
+    iw \
     bash \
     fastfetch \
     iftop

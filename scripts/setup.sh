@@ -33,7 +33,8 @@ apt install -qqy --no-install-recommends \
     systemd-timesyncd \
     tzdata \
     wireguard-tools \
-    wpasupplicant
+    wpasupplicant \
+    neofetch
 apt clean
 rm -rf /var/lib/apt/lists/*
 

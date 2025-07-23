@@ -34,7 +34,7 @@ PKG_CONFIG_PATH=${CHROOT}/usr/lib/pkgconfig:${CHROOT}/usr/lib/arm-linux-gnueabih
         -DCMAKE_C_FLAGS=-L$(pwd)/dist/usr/lib \
         -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
         -DCMAKE_SYSROOT=${CHROOT} \
-        -DCMAKE_SYSTEM_PROCESSOR=armv7 \
+        -DCMAKE_SYSTEM_PROCESSOR=arm \
         -S ${SRCDIR}/gt/source \
         -B build
 

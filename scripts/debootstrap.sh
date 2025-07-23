@@ -26,7 +26,7 @@ mount -o bind /dev/pts/ ${CHROOT}/dev/pts/
 mount -o bind /run ${CHROOT}/run/
 
 cp scripts/setup.sh ${CHROOT}
-chroot ${CHROOT} qemu-armhf-static /bin/sh -c /setup.sh
+chroot ${CHROOT} qemu-arm-static /bin/sh -c /setup.sh
 
 # cleanup
 for a in proc sys dev/pts dev run; do

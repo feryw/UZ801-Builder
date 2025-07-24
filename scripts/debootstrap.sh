@@ -60,12 +60,8 @@ cp linux-image.deb ${CHROOT}/tmp/
 chroot ${CHROOT} qemu-arm-static /bin/bash -c "dpkg -i /tmp/linux-image.deb"
 rm ${CHROOT}/tmp/linux-image.deb
 
-cd ${CHROOT}/boot/
-ln -sf vmlinuz-6.12.30-wyref vmlinuz
-ln -sf System.map-6.12.30-wyref System.map
-
-cd
-ls -al
+ln -sf ${CHROOT}/boot/vmlinuz-6.12.30-wyref ${CHROOT}/boot/vmlinuz
+ln -sf ${CHROOT}/boot/System.map-6.12.30-wyref ${CHROOT}/boot/System.map
 
 mkdir -p ${CHROOT}/boot/extlinux
 cp configs/extlinux.conf ${CHROOT}/boot/extlinux

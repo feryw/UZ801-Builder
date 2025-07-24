@@ -5,8 +5,8 @@ SRCDIR=$(pwd)/src
 
 # install gt dependencies
 chroot ${CHROOT} qemu-arm-static /bin/sh \
-    -c " apt update; apt install libconfig-dev -y"
-
+    -c " apt update; apt install libconfig-dev patchelf python3-pip python3-pyelftools scons -y"
+pip3 install staticx
 # build and install gt
 (
 cd src/libusbgx/
@@ -42,5 +42,5 @@ make -C build DESTDIR=$(pwd)/dist install
 
 rm -rf dist/usr/share dist/usr/lib/cmake dist/usr/lib/pkgconfig \
     dist/usr/lib/*a dist/usr/bin/ga* dist/usr/bin/s* dist/usr/include
-
+find . -name gt
 cp -a configs/templates dist/etc/gt

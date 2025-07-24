@@ -55,11 +55,17 @@ SUBSYSTEM=="net", ACTION=="add|change|move", ENV{DEVTYPE}=="gadget", ENV{NM_UNMA
 EOF
 
 # install kernel
-wget https://github.com/feryw/msm8916-kernel/releases/download/v6.12.30-armv7/linux-image-6.12.30-wyref_6.12.30-g746f514fe323-1_armhf.deb -O linux-image.deb \
-  && sudo dpkg -i linux-image.deb
+wget https://github.com/feryw/msm8916-kernel/releases/download/v6.12.30-armv7/linux-image-6.12.30-wyref_6.12.30-g746f514fe323-1_armhf.deb -O linux-image.deb
+cp linux-image.deb ${CHROOT}/tmp/
+chroot ${CHROOT} qemu-arm-static /bin/bash -c "dpkg -i /tmp/linux-image.deb"
+rm ${CHROOT}/tmp/linux-image.deb
 
-ln -sf /boot/vmlinuz-6.12.30-wyref /boot/vmlinuz
-ln -sf /boot/System.map-6.12.30-wyref /boot/System.map
+cd ${CHROOT}/boot/
+ln -sf vmlinuz-6.12.30-wyref vmlinuz
+ln -sf System.map-6.12.30-wyref System.map
+
+cd
+ls -al
 
 mkdir -p ${CHROOT}/boot/extlinux
 cp configs/extlinux.conf ${CHROOT}/boot/extlinux

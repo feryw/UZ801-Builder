@@ -71,6 +71,8 @@ mkdir -p "${CHROOT}/boot/dtbs"
 # copy custom dtb's
 cp dtbs/* ${CHROOT}/boot/dtbs
 
+find ${CHROOT}/boot/
+
 # create missing directory
 mkdir -p ${CHROOT}/lib/firmware/msm-firmware-loader
 

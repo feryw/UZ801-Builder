@@ -58,14 +58,16 @@ EOF
 wget https://github.com/feryw/msm8916-kernel/releases/download/v6.12.30-armv7/linux-image-6.12.30-wyref_6.12.30-g746f514fe323-1_armhf.deb -O linux-image.deb \
   && sudo dpkg -i linux-image.deb
 
+ln -sf /boot/vmlinuz-6.12.30-wyref /boot/vmlinuz
+ln -sf /boot/System.map-6.12.30-wyref /boot/System.map
+
 mkdir -p ${CHROOT}/boot/extlinux
 cp configs/extlinux.conf ${CHROOT}/boot/extlinux
 
-mkdir -p "${CHROOT}/boot/dtbs/qcom"
+mkdir -p "${CHROOT}/boot/dtbs"
 
 # copy custom dtb's
-cp dtbs/* ${CHROOT}/boot/dtbs/qcom
-cp /usr/lib/linux-image-6.12.30-wyref/msm8916-yiming-uz801v3.dtb ${CHROOT}/boot/dtbs/qcom
+cp dtbs/* ${CHROOT}/boot/dtbs
 
 # create missing directory
 mkdir -p ${CHROOT}/lib/firmware/msm-firmware-loader

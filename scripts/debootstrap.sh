@@ -55,8 +55,8 @@ SUBSYSTEM=="net", ACTION=="add|change|move", ENV{DEVTYPE}=="gadget", ENV{NM_UNMA
 EOF
 
 # install kernel
-wget -O - https://mirror.postmarketos.org/postmarketos/v25.06/armv7/linux-postmarketos-qcom-msm8916-6.12.1-r2.apk \
-    | tar xkzf - -C ${CHROOT} --exclude=.PKGINFO --exclude=.SIGN* 2>/dev/null
+wget https://github.com/feryw/msm8916-kernel/releases/download/v6.12.30-armv7/linux-image-6.12.30-wyref_6.12.30-g746f514fe323-1_armhf.deb -O linux-image.deb \
+  && sudo dpkg -i linux-image.deb
 
 mkdir -p ${CHROOT}/boot/extlinux
 cp configs/extlinux.conf ${CHROOT}/boot/extlinux
@@ -65,6 +65,7 @@ mkdir -p "${CHROOT}/boot/dtbs/qcom"
 
 # copy custom dtb's
 cp dtbs/* ${CHROOT}/boot/dtbs/qcom
+cp /usr/lib/linux-image-6.12.30-wyref/msm8916-yiming-uz801v3.dtb ${CHROOT}/boot/dtbs/qcom
 
 # create missing directory
 mkdir -p ${CHROOT}/lib/firmware/msm-firmware-loader

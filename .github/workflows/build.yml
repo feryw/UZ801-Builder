@@ -35,3 +35,8 @@ jobs:
         with:
           name: uz801-debian
           path: files/*
+      - name: Releases 
+        uses: softprops/action-gh-release@v2
+        with: 
+          name: uz801-debian
+          files: files/*

@@ -26,15 +26,21 @@ jobs:
 
       - name: Create images
         run: sudo sh -e scripts/build_images.sh
-
+          
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: uz801-alpine
+          name: uz801-alpine 
           path: files/*
+
+      - name: Generate release tag
+        id: version
+        run: |   
+          TAG_NAME="$(cat Alpine-3.22-${{ github.run_number }}-armv7"
           
       - name: Releases 
         uses: softprops/action-gh-release@v2 
         with:
           name: uz801-alpine-armv7
+          tag_name: ${{ steps.version.outputs.TAG_NAME }}
           files: files/*

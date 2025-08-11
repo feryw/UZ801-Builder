@@ -20,21 +20,19 @@ apt install -qqy --no-install-recommends \
     nftables \
     htop \
     nano \
-    libconfig9 \
     locales \
     modemmanager \
     netcat-traditional \
     net-tools \
     network-manager \
     openssh-server \
-    qrtr-tools \
     rmtfs \
     sudo \
     systemd-timesyncd \
     tzdata \
     wireguard-tools \
-    wpasupplicant \
-    neofetch
+    wpasupplicant
+
 apt clean
 rm -rf /var/lib/apt/lists/*
 

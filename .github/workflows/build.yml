@@ -36,7 +36,7 @@ jobs:
       - name: Generate release tag
         id: version
         run: |   
-          TAG_NAME="$(cat 'Alpine-3.22-armv7_${{ github.run_number }}')"
+          TAG_NAME="$(echo 'Alpine-3.22-armv7_${{ github.run_number }}')"
           
       - name: Releases 
         uses: softprops/action-gh-release@v2 

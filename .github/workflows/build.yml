@@ -36,10 +36,10 @@ jobs:
           name: uz801-debian
           path: files/*
 
-    - name: Generate release tag
+      - name: Generate release tag
         id: version
         run: |   
-          TAG_NAME="$(cat 'Debian Trixie-armv7_${{ github.run_number }}')"
+          TAG_NAME="$(echo 'Debian Trixie-armv7_${{ github.run_number }}')"
           
       - name: Releases 
         uses: softprops/action-gh-release@v2

@@ -88,7 +88,7 @@ rc-update add modemmanager default
 rc-update add networkmanager default
 rc-update add chronyd default
 "
-echo 'user ALL=(ALL:ALL) NOPASSWD: ALL' > ${CHROOT}/etc/sudoers.d/user
+echo 'wyref ALL=(ALL:ALL) NOPASSWD: ALL' > ${CHROOT}/etc/sudoers.d/wyref
 
 # add udev rules
 cat << EOF > ${CHROOT}/etc/udev/rules.d/10-udc.rules

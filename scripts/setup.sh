@@ -39,4 +39,4 @@ rm -rf /var/lib/apt/lists/*
 passwd -d root
 
 echo wyref:1::::/home/user:/bin/bash | newusers
-echo 'user ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/user
+echo 'wyref ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/wyref

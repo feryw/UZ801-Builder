@@ -1,10 +1,8 @@
 # OpenStick Image Builder
-Image builder for MSM8916 based 4G modem dongles
-
-This builder uses the precompiled [kernel](https://pkgs.postmarketos.org/package/v24.06/postmarketos/aarch64/linux-postmarketos-qcom-msm8916) provided by [postmarketOS](https://postmarketos.org/) for Qualcomm MSM8916 devices.
+Image builder for MSM8916 based 4G modem dongles.
 
 > [!NOTE]
-> This branch generates a `debian` image, use the [alpine branch](https://github.com/kinsamanka/OpenStick-Builder/tree/alpine) for an `alpine` image.
+> This debian-patch branch generates a 32 bit `debian` image, use the alpine-patch branch for an `alpine` 32 bit image.
 
 ## Build Instructions
 ### Build locally

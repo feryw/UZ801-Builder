@@ -130,8 +130,8 @@ Edit [`scripts/setup.sh`](scripts/setup.sh) to add/remove packages. Note that th
   
   | wlan0 | |
   | ----- | ---- |
-  | ssid | Openstick |
-  | password | openstick |
+  | ssid | uz801 |
+  | password | alpine |
   | ip addr | 192.168.4.1 |
 
   | usb0 | |
@@ -142,7 +142,7 @@ Edit [`scripts/setup.sh`](scripts/setup.sh) to add/remove packages. Note that th
   
   | | |
   | ----- | ---- |
-  | username | user |
+  | username | wyref |
   | password | 1 |
  
 - If your device is not based on **UZ801**, modify `/boot/extlinux/extlinux.conf` to use the correct devicetree

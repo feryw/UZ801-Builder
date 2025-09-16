@@ -7,14 +7,14 @@ interface-name=wlan0
 [wifi]
 band=bg
 mode=ap
-ssid=Openstick
+ssid=uz801
 
 [wifi-security]
 group=ccmp;
 key-mgmt=wpa-psk
 pairwise=ccmp;
 proto=rsn;
-psk=openstick
+psk=alpine
 
 [ipv4]
 address1=192.168.4.1/24

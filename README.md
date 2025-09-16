@@ -99,10 +99,4 @@
   resize2fs /dev/disk/by-partlabel/rootfs
   ```
 
-- To update the kernel of the `debian` image
-  ```shell
-  wget -O - http://mirror.postmarketos.org/postmarketos/<branch>/aarch64/linux-postmarketos-qcom-msm8916-<version>.apk \
-          | tar xkzf - -C / --exclude=.PKGINFO --exclude=.SIGN* 2>/dev/null
-  ```
-
-  Specify the correct `<branch>` and `<version>` values.
+- To update the kernel you can find from [here](https://github.com/feryw/msm8916-kernel/releases)

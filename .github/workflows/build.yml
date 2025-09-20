@@ -39,7 +39,7 @@ jobs:
       - name: Generate release tag
         id: version
         run: |   
-          TAG_NAME=$(echo "Debian-13.0_${{ github.run_number }}-armv7")
+          TAG_NAME=$(echo "Debian-10.0_${{ github.run_number }}-armv7")
           gh release delete "$TAG_NAME" --yes || true
           git tag -d "$TAG_NAME" 2>/dev/null || true
           git push --delete origin "$TAG_NAME" 2>/dev/null || true

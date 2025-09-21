@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 CHROOT=${CHROOT=$(pwd)/rootfs}
-RELEASE=${RELEASE=bullseye}
+RELEASE=${RELEASE=oldstable}
 HOST_NAME=${HOST_NAME=uz801-debian}
 
 rm -rf ${CHROOT}

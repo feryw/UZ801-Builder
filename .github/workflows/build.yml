@@ -36,7 +36,7 @@ jobs:
       - name: Generate release tag
         id: version
         run: |   
-          TAG_NAME=$(echo "Alpine-3.22-armv7_${{ github.run_number }}")
+          TAG_NAME=$(echo "Alpine-3.23-armv7_${{ github.run_number }}")
           gh release delete "$TAG_NAME" --yes || true
           git tag -d "$TAG_NAME" 2>/dev/null || true
           git push --delete origin "$TAG_NAME" 2>/dev/null || true

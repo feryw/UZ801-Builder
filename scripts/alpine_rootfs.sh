@@ -2,8 +2,8 @@
 
 export CHROOT=${CHROOT=$(pwd)/rootfs}
 export HOST_NAME=${HOST_NAME=uz801-alpine}
-export RELEASE=${RELEASE=v3.22}
-export PMOS_RELEASE=${PMOS_RELEASE=v25.06}
+export RELEASE=${RELEASE=v3.23}
+export PMOS_RELEASE=${PMOS_RELEASE=v25.12}
 export MIRROR=${MIRROR=http://dl-cdn.alpinelinux.org/alpine}
 export PMOS_MIRROR=${PMOS_MIRROR=http://mirror.postmarketos.org/postmarketos}
 
@@ -21,7 +21,7 @@ cp /etc/resolv.conf ${CHROOT}/etc/
 mkdir -p ${CHROOT}/usr/bin
 cp $(which qemu-armhf-static) ${CHROOT}/usr/bin
 
-wget https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/v2.14.9/x86_64/apk.static
+wget https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/v3.0.3/x86_64/apk.static
 chmod a+x apk.static
 
 ./apk.static add -p ${CHROOT} --initdb -U --arch armv7 --allow-untrusted alpine-base

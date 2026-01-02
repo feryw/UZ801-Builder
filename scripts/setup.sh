@@ -20,6 +20,7 @@ apt install -qqy --no-install-recommends \
     iptables \
     libconfig9 \
     htop \
+    bash \
     nano \
     neofetch \
     iftop \
@@ -42,5 +43,5 @@ rm -rf /var/lib/apt/lists/*
 
 passwd -d root
 
-echo wyref:1::::/home/user:/bin/bash | newusers
+echo wyref:1::::/home/wyref:/bin/bash | newusers
 echo 'wyref ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/wyref

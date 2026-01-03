@@ -50,17 +50,29 @@ apk add --no-cache \
     sudo \
     udev-init-scripts \
     udev-init-scripts-openrc \
-    wireguard-tools \
-    wireguard-tools-wg-quick \
     wpa_supplicant \
     shadow \
     nftables \
     hostapd \
     wireless-tools \
+    wireless-regdb \
+    binutils \
+    zstd \
     iw \
     bash \
+    jq \
     fastfetch \
-    iftop
+    iftop \
+    htop \
+    nano \
+    speedtest-cli \
+    openssh-client-common
+    openssh-client-default \
+    curl \
+    tzdata \
+    wget2 \
+    yamllint \
+    iperf3
     
 "
 # setup alpine

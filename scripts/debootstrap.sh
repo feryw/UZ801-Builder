@@ -55,7 +55,7 @@ SUBSYSTEM=="net", ACTION=="add|change|move", ENV{DEVTYPE}=="gadget", ENV{NM_UNMA
 EOF
 
 # install kernel
-wget https://github.com/feryw/msm8916-kernel/releases/download/v6.12.51-wyref-gcc10-armv7/linux-image-6.12.51-wyref_6.12.51-g07d59fad5ed5-2_armhf.deb -O linux-image.deb
+wget https://github.com/feryw/msm8916-kernel/releases/download/v6.12.63-wyref-gcc10-armv7/linux-image-6.12.63-wyref_6.12.63-ga626e6f4f5d7-2_armhf.deb -O linux-image.deb
 cp linux-image.deb ${CHROOT}/tmp/
 chroot ${CHROOT} qemu-arm-static /bin/bash -c "dpkg -i /tmp/linux-image.deb"
 rm ${CHROOT}/tmp/linux-image.deb

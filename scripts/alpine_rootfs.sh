@@ -66,7 +66,7 @@ apk add --no-cache \
     htop \
     nano \
     speedtest-cli \
-    openssh-client-common
+    openssh-client-common \
     openssh-client-default \
     curl \
     tzdata \

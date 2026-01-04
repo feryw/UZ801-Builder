@@ -24,7 +24,8 @@ else
     APK_VER="v2.14.4"
 fi
 
-export RELEASE PMOS_RELEASE
+export RELEASE=${RELEASE}
+export PMOS_RELEASE=${PMOS_RELEASE}
 export MIRROR=${MIRROR=http://dl-cdn.alpinelinux.org/alpine}
 export PMOS_MIRROR=${PMOS_MIRROR=http://mirror.postmarketos.org/postmarketos}
 

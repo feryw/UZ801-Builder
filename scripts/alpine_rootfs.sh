@@ -38,7 +38,7 @@ mkdir -p ${CHROOT}/usr/bin
 cp $(which qemu-armhf-static) ${CHROOT}/usr/bin
 
 chmod a+x apk.static
-./apk.static add -p ${CHROOT} --initdb -U --arch armv7 --allow-untrusted alpine-base
+./apk.static add -p ${CHROOT} --initdb -U --arch armhf --allow-untrusted alpine-base
 rm apk.static
 
 # install apps

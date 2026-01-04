@@ -26,10 +26,12 @@ case "$INPUT_RELEASE" in
     RELEASE="v3.21"
     PMOS_RELEASE="v24.12"
     APK_VER="v2.14.6"
+    ;;
   v24.06)
     RELEASE="v3.20"
     PMOS_RELEASE="v24.06"
     APK_VER="v2.14.4"
+    ;;
   *)
     echo "Unsupported release: $INPUT_RELEASE" >&2
     exit 1

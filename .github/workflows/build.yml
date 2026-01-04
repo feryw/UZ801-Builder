@@ -63,7 +63,7 @@ jobs:
       - name: Generate release tag
         id: version
         run: |   
-          TAG_NAME=$(echo "Alpine-v${{ inputs.release }}-${{ inputs.arch }}_${{ github.run_number }}")
+          TAG_NAME=$(echo "Alpine-v${{ inputs.release }}-${{ inputs.arch }}-${{ inputs.device }}__${{ github.run_number }}")
           gh release delete "$TAG_NAME" --yes || true
           git tag -d "$TAG_NAME" 2>/dev/null || true
           git push --delete origin "$TAG_NAME" 2>/dev/null || true
@@ -74,6 +74,6 @@ jobs:
       - name: Releases 
         uses: softprops/action-gh-release@v2 
         with:
-          name: uz801-alpine-${{ inputs.arch }}
+          name: uz801-alpine-v${{ inputs.release }}-${{ inputs.arch }}-${{ inputs.device }}
           tag_name: ${{ steps.version.outputs.TAG_NAME }}
           files: files/*

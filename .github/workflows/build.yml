@@ -11,6 +11,7 @@ on:
         options:
           - uz801
           - uf896
+          - ufi001
       release:
         description: "OS Version"
         required: true

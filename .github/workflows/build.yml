@@ -3,6 +3,14 @@ name: Build
 on:
   workflow_dispatch:
     inputs:
+      device:
+        description: "Device Type"
+        required: true
+        default: 'uz801'
+        type: choice
+        options:
+          - uz801
+          - uf896
       release:
         description: "OS Version"
         required: true
@@ -35,7 +43,7 @@ jobs:
         run: sudo sh -e scripts/install_deps.sh
 
       - name: Build hyp and aboot firmware
-        run: sudo sh -e scripts/build_hyp_aboot.sh
+        run: sudo DEV_TYPE="${{ inputs.device }}" sh -e scripts/build_hyp_aboot.sh
 
       - name: Extract MSM8916 firmware
         run: sudo sh -e scripts/extract_fw.sh

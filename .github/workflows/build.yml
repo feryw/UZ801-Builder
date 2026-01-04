@@ -41,6 +41,8 @@ jobs:
         run: sudo sh -e scripts/extract_fw.sh
 
       - name: Create rootfs
+        env: 
+          RELEASE_INPUT: ${{ inputs.release }}
         run: sudo sh -e scripts/alpine_rootfs.sh
 
       - name: Create images

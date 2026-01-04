@@ -102,7 +102,7 @@ apk add --no-cache \
     openssh-client-default \
     curl \
     tzdata \
-    wget2 \
+    wget \
     yamllint \
     iperf3
     

@@ -2,6 +2,25 @@ name: Build
 
 on:
   workflow_dispatch:
+    inputs:
+      release:
+        description: "OS Version"
+        required: true
+        default: '25.12'
+        type: choice
+        options:
+          - 25.12
+          - 25.06
+          - 24.12
+          - 24.06
+    arch:
+        description: "Target architecture"
+        required: true
+        default: 'armv7'
+        type: choice
+        options:
+          - armv7
+          - armv8
 
 jobs:
   build:
@@ -36,7 +55,7 @@ jobs:
       - name: Generate release tag
         id: version
         run: |   
-          TAG_NAME=$(echo "Alpine-3.23-armv7_${{ github.run_number }}")
+          TAG_NAME=$(echo "Alpine-v${{ inputs.release }}-${{ inputs.arch }}_${{ github.run_number }}")
           gh release delete "$TAG_NAME" --yes || true
           git tag -d "$TAG_NAME" 2>/dev/null || true
           git push --delete origin "$TAG_NAME" 2>/dev/null || true

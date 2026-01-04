@@ -1,31 +1,43 @@
-#!/bin/sh -e
+#!/bin/sh
 
-export CHROOT=${CHROOT=$(pwd)/rootfs}
-export HOST_NAME=${HOST_NAME=uz801-alpine}
+set -eu
+
+CHROOT="${CHROOT:-$(pwd)/rootfs}"
+HOST_NAME="${HOST_NAME:-uz801-alpine}"
+export CHROOT HOST_NAME
 
 rm -rf ${CHROOT}
 mkdir -p ${CHROOT}/etc/apk
 
-if [ "${{ inputs.release }}" = "v25.12" ]; then
+INPUT_RELEASE="${RELEASE_INPUT:?RELEASE_INPUT not set}"
+
+case "$INPUT_RELEASE" in
+  v25.12)
     RELEASE="v3.23"
     PMOS_RELEASE="v25.12"
     APK_VER="v3.0.3"
-elif [ "${{ inputs.release }}" = "v25.06" ]; then
+    ;;
+  v25.06)
     RELEASE="v3.22"
     PMOS_RELEASE="v25.06"
     APK_VER="v2.14.9"
-elif [ "${{ inputs.release }}" = "v24.12" ]; then
+    ;;
+  v24.12)
     RELEASE="v3.21"
     PMOS_RELEASE="v24.12"
     APK_VER="v2.14.6"
-else
+  v24.06)
     RELEASE="v3.20"
     PMOS_RELEASE="v24.06"
     APK_VER="v2.14.4"
-fi
+  *)
+    echo "Unsupported release: $INPUT_RELEASE" >&2
+    exit 1
+    ;;
+esac
 
-export RELEASE=${RELEASE}
-export PMOS_RELEASE=${PMOS_RELEASE}
+export RELEASE
+export PMOS_RELEASE
 export MIRROR=${MIRROR=http://dl-cdn.alpinelinux.org/alpine}
 export PMOS_MIRROR=${PMOS_MIRROR=http://mirror.postmarketos.org/postmarketos}
 

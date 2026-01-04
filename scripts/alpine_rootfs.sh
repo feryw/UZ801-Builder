@@ -1,30 +1,32 @@
 #!/bin/sh -e
 
+export CHROOT=${CHROOT=$(pwd)/rootfs}
+export HOST_NAME=${HOST_NAME=uz801-alpine}
+
 rm -rf ${CHROOT}
 mkdir -p ${CHROOT}/etc/apk
 
-export CHROOT=${CHROOT=$(pwd)/rootfs}
-export HOST_NAME=${HOST_NAME=uz801-alpine}
 if [ "${{ inputs.release }}" = "v25.12" ]; then
-    export RELEASE=${RELEASE=v3.23}
-    export PMOS_RELEASE=${PMOS_RELEASE=v25.12}
-    wget https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/v3.0.3/x86_64/apk.static
+    RELEASE="v3.23"
+    PMOS_RELEASE="v25.12"
+    APK_VER="v3.0.3"
 elif [ "${{ inputs.release }}" = "v25.06" ]; then
-    export RELEASE=${RELEASE=v3.22}
-    export PMOS_RELEASE=${PMOS_RELEASE=v25.06}
-    wget https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/v2.14.9/x86_64/apk.static
+    RELEASE="v3.22"
+    PMOS_RELEASE="v25.06"
+    APK_VER="v2.14.9"
 elif [ "${{ inputs.release }}" = "v24.12" ]; then
-    export RELEASE=${RELEASE=v3.21}
-    export PMOS_RELEASE=${PMOS_RELEASE=v24.12}
-    wget https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/v2.14.6/x86_64/apk.static
+    RELEASE="v3.21"
+    PMOS_RELEASE="v24.12"
+    APK_VER="v2.14.6"
 else
-    export RELEASE=${RELEASE=v3.20}
-    export PMOS_RELEASE=${PMOS_RELEASE=v24.06}
-    wget https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/v2.14.4/x86_64/apk.static
+    RELEASE="v3.20"
+    PMOS_RELEASE="v24.06"
+    APK_VER="v2.14.4"
 fi
+
+export RELEASE PMOS_RELEASE
 export MIRROR=${MIRROR=http://dl-cdn.alpinelinux.org/alpine}
 export PMOS_MIRROR=${PMOS_MIRROR=http://mirror.postmarketos.org/postmarketos}
-
 
 cat << EOF >  ${CHROOT}/etc/apk/repositories
 ${MIRROR}/${RELEASE}/main
@@ -37,6 +39,7 @@ cp /etc/resolv.conf ${CHROOT}/etc/
 mkdir -p ${CHROOT}/usr/bin
 cp $(which qemu-armhf-static) ${CHROOT}/usr/bin
 
+wget "https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/${APK_VER}/x86_64/apk.static"
 chmod a+x apk.static
 ./apk.static add -p ${CHROOT} --initdb -U --arch armhf --allow-untrusted alpine-base
 rm apk.static

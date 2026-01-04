@@ -56,7 +56,7 @@ cp $(which qemu-armhf-static) ${CHROOT}/usr/bin
 
 wget "https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/${APK_VER}/x86_64/apk.static"
 chmod a+x apk.static
-./apk.static add -p ${CHROOT} --initdb -U --arch armhf --allow-untrusted alpine-base
+./apk.static add -p ${CHROOT} --initdb -U --arch armv7 --allow-untrusted alpine-base
 rm apk.static
 
 # install apps

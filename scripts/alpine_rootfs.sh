@@ -5,15 +5,15 @@ mkdir -p ${CHROOT}/etc/apk
 
 export CHROOT=${CHROOT=$(pwd)/rootfs}
 export HOST_NAME=${HOST_NAME=uz801-alpine}
-if [ "${{ inputs.release }}"  = "25.12"]; then
+if [ "${{ inputs.release }}" = "25.12"]; then
     export RELEASE=${RELEASE=v3.23}
     export PMOS_RELEASE=${PMOS_RELEASE=v25.12}
     wget https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/v3.0.3/x86_64/apk.static
-elseif [ "${{ inputs.release }}"  = "25.06"]; then
+elseif [ "${{ inputs.release }}" = "25.06"]; then
     export RELEASE=${RELEASE=v3.22}
     export PMOS_RELEASE=${PMOS_RELEASE=v25.06}
     wget https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/v2.14.9/x86_64/apk.static
-elseif [ "${{ inputs.release }}"  = "24.12"]; then
+elseif [ "${{ inputs.release }}" = "24.12"]; then
     export RELEASE=${RELEASE=v3.21}
     export PMOS_RELEASE=${PMOS_RELEASE=v24.12}
     wget https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/v2.14.6/x86_64/apk.static

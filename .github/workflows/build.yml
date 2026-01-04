@@ -66,6 +66,6 @@ jobs:
       - name: Releases 
         uses: softprops/action-gh-release@v2 
         with:
-          name: uz801-alpine-armv7
+          name: uz801-alpine-${{ inputs.arch }}
           tag_name: ${{ steps.version.outputs.TAG_NAME }}
           files: files/*

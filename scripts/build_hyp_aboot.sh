@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -eu
 
 TYPEDEV="${DEV_TYPE:?DEV_TYPE not set}"
 
@@ -24,8 +24,11 @@ make -C src/qhypstub CROSS_COMPILE=aarch64-linux-gnu-
 # inititalizing the mmc (maybe due to using old/recycled flash chips)
 echo 'DEFINES += USE_TARGET_HS200_CAPS=1' >> src/lk2nd/project/lk1st-msm8916.mk
 
-make -C src/lk2nd LK2ND_BUNDLE_DTB="msm8916-512mb-mtp.dtb" LK2ND_COMPATIBLE="$DESCR" \
-    TOOLCHAIN_PREFIX=arm-none-eabi- lk1st-msm8916 -j$(nproc)
+make -C src/lk2nd \
+  LK2ND_BUNDLE_DTB="msm8916-512mb-mtp.dtb" \
+  LK2ND_COMPATIBLE="$DESCR" \
+  TOOLCHAIN_PREFIX=arm-none-eabi- \
+  lk1st-msm8916 -j$(nproc)
 
 # test sign
 mkdir -p files

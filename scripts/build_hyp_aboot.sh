@@ -11,7 +11,7 @@ case "$TYPEDEV" in
     ;;
   ufi001)
     DESCR="thwc,ufi001c"
-    ;;  
+    ;;
   *)
     echo "Unsupported device: $TYPEDEV" >&2
     exit 1

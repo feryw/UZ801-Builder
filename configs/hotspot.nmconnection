@@ -10,7 +10,7 @@ channel=6
 channel-width=20
 mode=ap
 powersave=2
-ssid=uz801
+ssid=zhihe
 
 [wifi-security]
 key-mgmt=wpa-psk

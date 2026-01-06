@@ -22,7 +22,7 @@ os_descs:
 strings = ( 
     {
         lang = 0x409;
-0~        manufacturer = "Foo Inc.";
+        manufacturer = "Foo Inc.";
         product = "Bar Gadget";
         serialnumber = "0123456789";
     } );
@@ -46,7 +46,7 @@ functions:
 configs = ( 
     {
         id = 1;
-0~        name = "The only one";
+        name = "The only one";
         attrs: 
         {
             bmAttributes = 0x80;

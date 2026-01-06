@@ -158,16 +158,20 @@ chmod 0600 ${CHROOT}/etc/NetworkManager/system-connections/*
 
 mkdir -p ${CHROOT}/boot/extlinux
 cp configs/${TYPEDEV}_extlinux.conf ${CHROOT}/boot/extlinux/extlinux.conf
+cat ${CHROOT}/boot/extlinux/extlinux.conf
+ls ${CHROOT}/boot
 
 mkdir -p "${CHROOT}/boot/dtbs/qcom"
 # copy custom dtb's
 cp dtbs/* ${CHROOT}/boot/dtbs/qcom
+ls ${CHROOT}/boot/dtbs/qcom/*msm8916*
 
 # update fstab
 echo "/dev/mmcblk0p14\t/boot\text2\tdefaults\t0 2" > ${CHROOT}/etc/fstab
 
 # copy gadget-tool templates
 cp -a configs/templates ${CHROOT}/etc/gt
+ls ${CHROOT}/etc/gt/templates
 
 # backup rootfs
 tar cpzf alpine_rootfs.tgz \

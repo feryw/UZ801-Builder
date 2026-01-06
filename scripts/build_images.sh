@@ -14,7 +14,7 @@ tar xf alpine_rootfs.tgz -C mnt ./boot --exclude='./boot/linux.efi' --strip-comp
 umount mnt
 
 # create root img
-truncate -s 2684354560 rootfs.raw
+truncate -s 1610612736 rootfs.raw
 mkfs.ext4 rootfs.raw
 mount rootfs.raw mnt
 tar xpf alpine_rootfs.tgz -C mnt --exclude='./boot/*' --exclude='./root/*' --exclude='./dev/*'

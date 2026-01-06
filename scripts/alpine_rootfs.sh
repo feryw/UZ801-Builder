@@ -157,7 +157,7 @@ chmod 0600 ${CHROOT}/etc/NetworkManager/system-connections/*
 # sed -i '/\[main\]/a dns=dnsmasq' ${CHROOT}/etc/NetworkManager/NetworkManager.conf
 
 mkdir -p ${CHROOT}/boot/extlinux
-cp configs/$TYPEDEV_extlinux.conf ${CHROOT}/boot/extlinux/extlinux.conf
+cp configs/${TYPEDEV}_extlinux.conf ${CHROOT}/boot/extlinux/extlinux.conf
 
 mkdir -p "${CHROOT}/boot/dtbs/qcom"
 # copy custom dtb's

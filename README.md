@@ -50,7 +50,14 @@
   fastboot flash sbl1 sbl1.mbn
   fastboot flash tz tz.mbn
   fastboot flash boot boot.bin
+  ```
+  For Debian
+  ```shell
   fastboot flash rootfs rootfs.bin
+  ```
+  For Alpine
+  ```shell
+   fastboot flash rootfs alpine_rootfs.bin
   ```
 - Restore original partitions
   ```shell
@@ -68,7 +75,7 @@
   
   | wlan0 | |
   | ----- | ---- |
-  | ssid | uz801 |
+  | ssid | zhihe |
   | password | alpinehotspot |
   | ip addr | 192.168.4.1 |
 

@@ -9,7 +9,7 @@ case "$TYPEDEV" in
   uf896)
     DESCR="thwc,uf896"
     ;;
-  ufi001)
+  ufi001c)
     DESCR="thwc,ufi001c"
     ;;
   *)

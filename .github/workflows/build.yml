@@ -60,7 +60,8 @@ jobs:
               exit 1
               ;;
           esac
-    
+
+          echo "Description: ${DESCR}"
           make -C src/qhypstub CROSS_COMPILE=aarch64-linux-gnu-
 
           # patch to reduce mmc speed as some boards have intermittent failures when

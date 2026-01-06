@@ -69,7 +69,7 @@
   | wlan0 | |
   | ----- | ---- |
   | ssid | uz801 |
-  | password | alpine |
+  | password | alpinehotspot |
   | ip addr | 192.168.4.1 |
 
   | usb0 | |

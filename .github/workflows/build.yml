@@ -50,7 +50,7 @@ jobs:
         run: sudo sh -e scripts/extract_fw.sh
 
       - name: Create rootfs
-        run: sudo RELEASE_INPUT="${{ inputs.release }}" sh -e scripts/alpine_rootfs.sh
+        run: sudo RELEASE_INPUT="${{ inputs.release }}" DEV_TYPE="${{ inputs.device }}" sh -e scripts/alpine_rootfs.sh
 
       - name: Create images
         run: sudo sh -e scripts/build_images.sh

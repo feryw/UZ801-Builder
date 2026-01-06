@@ -2,14 +2,15 @@
 
 set -eu
 
+INPUT_RELEASE="${RELEASE_INPUT:?RELEASE_INPUT not set}"
+TYPEDEV="${DEV_TYPE:?DEV_TYPE not set}"
+
 CHROOT="${CHROOT:-$(pwd)/rootfs}"
-HOST_NAME="${HOST_NAME:-uz801-alpine}"
+HOST_NAME="${HOST_NAME:-$TYPEDEV-alpine}"
 export CHROOT HOST_NAME
 
 rm -rf ${CHROOT}
 mkdir -p ${CHROOT}/etc/apk
-
-INPUT_RELEASE="${RELEASE_INPUT:?RELEASE_INPUT not set}"
 
 case "$INPUT_RELEASE" in
   v25.12)
@@ -156,7 +157,7 @@ chmod 0600 ${CHROOT}/etc/NetworkManager/system-connections/*
 # sed -i '/\[main\]/a dns=dnsmasq' ${CHROOT}/etc/NetworkManager/NetworkManager.conf
 
 mkdir -p ${CHROOT}/boot/extlinux
-cp configs/extlinux.conf ${CHROOT}/boot/extlinux
+cp configs/$TYPEDEV_extlinux.conf ${CHROOT}/boot/extlinux/extlinux.conf
 
 mkdir -p "${CHROOT}/boot/dtbs/qcom"
 # copy custom dtb's

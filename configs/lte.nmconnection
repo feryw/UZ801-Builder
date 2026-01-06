@@ -8,10 +8,11 @@ interface-name=wwan0qmi0
 apn=internet
 
 [ipv4]
+dns=1.1.1.1;8.8.8.8;
 method=auto
 
 [ipv6]
 addr-gen-mode=default
-method=auto
+method=disabled
 
 [proxy]

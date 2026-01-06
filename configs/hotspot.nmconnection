@@ -16,7 +16,7 @@ ssid=uz801
 key-mgmt=wpa-psk
 pmf=1
 proto=rsn;
-psk=alpine
+psk=alpinehotspot
 
 [ipv4]
 address1=192.168.4.1/24

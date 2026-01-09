@@ -105,7 +105,11 @@ apk add --no-cache \
     tzdata \
     wget \
     yamllint \
-    iperf3
+    iperf3 \
+    qmi-utils \
+    qmi-ping \
+    libqmi-bash-completion \
+    qmic
     
 "
 # setup alpine

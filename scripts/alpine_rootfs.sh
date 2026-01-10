@@ -113,7 +113,8 @@ apk add --no-cache \
     darkstat \
     btop \
     vnstat \
-    util-linux
+    util-linux \
+    powertop
     
 "
 # setup alpine

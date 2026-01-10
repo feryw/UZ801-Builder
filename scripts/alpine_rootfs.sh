@@ -109,7 +109,11 @@ apk add --no-cache \
     qmi-utils \
     qmi-ping \
     libqmi-bash-completion \
-    qmic
+    qmic \
+    darkstat \
+    btop \
+    vnstat \
+    util-linux
     
 "
 # setup alpine

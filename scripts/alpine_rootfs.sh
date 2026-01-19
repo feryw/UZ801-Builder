@@ -114,9 +114,18 @@ apk add --no-cache \
     btop \
     vnstat \
     util-linux \
-    powertop
-    
+    powertop \
+    minicom \
+    musl-utils \
+    gawk \
+    coreutils
+
+cap=$(awk '$1==16 {print strtonum("0x"$2)}' /proc/self/auxv)
+printf "AT_HWCAP=0x%x\n" "$cap"
+cat /proc/cpuinfo
+uname -m
 "
+
 # setup alpine
 chroot ${CHROOT} ash -l -c "
 echo wyref:1::::/home/wyref:/bin/ash | newusers

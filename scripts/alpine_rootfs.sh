@@ -120,10 +120,10 @@ apk add --no-cache \
     gawk \
     coreutils
 
-cap=$(awk '$1==16 {print strtonum("0x"$2)}' /proc/self/auxv)
-printf "AT_HWCAP=0x%x\n" "$cap"
 cat /proc/cpuinfo
 uname -m
+cap=$(awk '$1==16 {print $2; exit}' /proc/self/auxv)
+printf 'AT_HWCAP=0x%x\n' "$cap"
 "
 
 # setup alpine

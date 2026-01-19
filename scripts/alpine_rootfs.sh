@@ -122,8 +122,6 @@ apk add --no-cache \
 
 cat /proc/cpuinfo
 uname -m
-cap=$(awk '$1==16 {print $2; exit}' /proc/self/auxv)
-printf 'AT_HWCAP=0x%x\n' "$cap"
 "
 
 # setup alpine

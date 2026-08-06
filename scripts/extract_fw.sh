@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+SRC="https://archive.org/download/dragonboard-410c-bootloader-emmc-linux-176/dragonboard-410c-bootloader-emmc-linux-176.zip"
+SHA256=a37c4e82a970ae2350fcfc7180559caf1dc3928e7c169316fe4ab899b7d305ad
+FNAME=$(basename ${SRC})
+
 TMPDIR=$(mktemp -d)
 
 mkdir -p files
@@ -39,12 +43,11 @@ dd if=${TMPDIR}/gpt.img bs=512 skip=2 count=32 >> files/gpt_both0.bin
 dd if=${TMPDIR}/gpt.img bs=512 skip=350241 >> files/gpt_both0.bin
 
 # extract Qualcom firmware
-wget -P ${TMPDIR} https://archive.org/download/dragonboard-410c-bootloader-emmc-linux-176/dragonboard-410c-bootloader-emmc-linux-176.zip
+wget -P ${TMPDIR} ${SRC}
 
-unzip -o -j -d files/ ${TMPDIR}/dragonboard-410c-bootloader-emmc-linux-176.zip \
-    dragonboard-410c-bootloader-emmc-linux-176/rpm.mbn \
-    dragonboard-410c-bootloader-emmc-linux-176/sbl1.mbn \
-    dragonboard-410c-bootloader-emmc-linux-176/tz.mbn
+echo "${SHA256} ${TMPDIR}/${FNAME}" | sha256sum -c
+
+unzip -o -j -d files/ ${TMPDIR}/${FNAME} ${FNAME%.*}/rpm.mbn ${FNAME%.*}/sbl1.mbn ${FNAME%.*}/tz.mbn
 
 cleanup() {
     rm -rf ${TMPDIR}

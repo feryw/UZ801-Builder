@@ -49,8 +49,8 @@ jobs:
         run: |
           # 设定北京时间 (UTC+8) 格式化时间戳
           export TZ="Asia/Shanghai"
-          TAG=$(date +'%Y.%m.%d-%H%M')-${BOARD}
-          NAME="$(date +'%Y-%m-%d %H:%M') - ${BOARD}"
+          TAG="${BOARD}-v$(date +'%Y%m%d-%H%M')"
+          NAME="${BOARD}-v$(date +'%Y%m%d-%H%M')"
           echo "tag_name=${TAG}" >> "$GITHUB_OUTPUT"
           echo "release_name=${NAME}" >> "$GITHUB_OUTPUT"
 

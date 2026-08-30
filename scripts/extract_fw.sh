@@ -2,16 +2,22 @@
 
 SRC="https://archive.org/download/dragonboard-410c-bootloader-emmc-linux-176/dragonboard-410c-bootloader-emmc-linux-176.zip"
 SHA256=a37c4e82a970ae2350fcfc7180559caf1dc3928e7c169316fe4ab899b7d305ad
-FNAME=$(basename ${SRC})
+FNAME=$(basename "${SRC}")
 
 TMPDIR=$(mktemp -d)
 
+# 1. 立即注册退出清理陷阱（无论脚本成功还是中途报错均会安全释放）
+cleanup() {
+    rm -rf "${TMPDIR}"
+}
+trap cleanup EXIT INT TERM
+
 mkdir -p files
 
-# create GPT
-truncate -s 179323904 ${TMPDIR}/gpt.img
+# 2. 创建 GPT 分区表
+truncate -s 179323904 "${TMPDIR}/gpt.img"
 
-cat << EOF | sfdisk ${TMPDIR}/gpt.img
+cat << EOF | sfdisk "${TMPDIR}/gpt.img"
 label: gpt
 label-id: DB708ACF-2E04-8DE2-BAFE-30C9B26444C5
 unit: sectors
@@ -35,23 +41,18 @@ gpt.img13 : start=      217122, size=      131072, type=20117F86-E985-4357-B9EE-
 gpt.img14 : start=      348194, size=        2015, type=1B81E7E6-F50D-419B-A739-2AEEF8DA3335, uuid=A7AB80E8-E9D1-E8CD-F157-93F69B1D141E, name="rootfs"
 EOF
 
-# create fastboot compatible partition image
-# primary gpt
-dd if=${TMPDIR}/gpt.img of=files/gpt_both0.bin bs=512 count=34
-# backup gpt
-dd if=${TMPDIR}/gpt.img bs=512 skip=2 count=32 >> files/gpt_both0.bin
-dd if=${TMPDIR}/gpt.img bs=512 skip=350241 >> files/gpt_both0.bin
+# 3. 合成 fastboot 格式分区镜像
+dd if="${TMPDIR}/gpt.img" of=files/gpt_both0.bin bs=512 count=34
+dd if="${TMPDIR}/gpt.img" bs=512 skip=2 count=32 >> files/gpt_both0.bin
+dd if="${TMPDIR}/gpt.img" bs=512 skip=350241 >> files/gpt_both0.bin
 
-# extract Qualcom firmware
-wget -P ${TMPDIR} ${SRC}
+# 4. 下载并校验高通官方固件
+echo "Downloading Qualcomm firmware..."
+wget --tries=3 --timeout=30 -q --show-progress -P "${TMPDIR}" "${SRC}"
 
 echo "${SHA256} ${TMPDIR}/${FNAME}" | sha256sum -c
 
-unzip -o -j -d files/ ${TMPDIR}/${FNAME} ${FNAME%.*}/rpm.mbn ${FNAME%.*}/sbl1.mbn ${FNAME%.*}/tz.mbn
+# 5. 解压提取 rpm/sbl1/tz
+unzip -o -j -d files/ "${TMPDIR}/${FNAME}" "${FNAME%.*}/rpm.mbn" "${FNAME%.*}/sbl1.mbn" "${FNAME%.*}/tz.mbn"
 
-cleanup() {
-    rm -rf ${TMPDIR}
-    exit "$1"
-}
-
-trap 'cleanup $?' EXIT
+echo "Firmware extracted successfully."

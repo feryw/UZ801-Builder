@@ -9,4 +9,4 @@ files
 mnt
 rootfs
 
-!firmware/*
+!firmware/**

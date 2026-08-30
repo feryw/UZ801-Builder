@@ -30,6 +30,9 @@ jobs:
       - name: Create images
         run: sudo sh -e scripts/build_images.sh
 
+      - name: Copy custom firmware partitions
+        run: BOARD=thwc-uf896 sudo sh -e scripts/copy_custom_fw.sh
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
         with:

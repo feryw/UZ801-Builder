@@ -2,10 +2,21 @@ name: Build
 
 on:
   workflow_dispatch:
+    inputs:
+      board:
+        description: "Target Board Name"
+        required: true
+        default: "yiming-uz801v3"
+        type: string
+
+env:
+  BOARD: ${{ inputs.board || 'yiming-uz801v3' }}
 
 jobs:
   build:
     runs-on: ubuntu-24.04-arm
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v7
@@ -31,10 +42,48 @@ jobs:
         run: sudo sh -e scripts/build_images.sh
 
       - name: Copy custom firmware partitions
-        run: BOARD=thwc-uf896 sudo sh -e scripts/copy_custom_fw.sh
+        run: sudo -E BOARD=${BOARD} sh -e scripts/copy_custom_fw.sh
+
+      - name: Generate Release Tag & Name
+        id: vars
+        run: |
+          # 设定北京时间 (UTC+8) 格式化时间戳
+          export TZ="Asia/Shanghai"
+          TAG=$(date +'%Y.%m.%d-%H%M')-${BOARD}
+          NAME="$(date +'%Y-%m-%d %H:%M') - ${BOARD}"
+          echo "tag_name=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "release_name=${NAME}" >> "$GITHUB_OUTPUT"
 
       - name: Upload artifacts
+        id: artifact_upload
         uses: actions/upload-artifact@v7
         with:
           name: openstick-debian
           path: files/*
+      
+      - name: Generate Release Notes
+        run: |
+          cat << 'EOF' > release_body.md
+          ## OpenStick Debian 固件发布 🚀
+
+          - **适配机型 (Board)**: `${{ env.BOARD }}`
+          - **提交哈希 (Commit)**: `${{ github.sha }}`
+          - **触发事件**: `${{ github.event_name }}`
+
+          ---
+
+          ### 📦 产物下载 (Artifacts)
+          * 🔗 **[直接下载 Artifact 压缩包](${{ steps.artifact_upload.outputs.artifact-url }})**
+          * 🔍 **[查看本次 Actions 运行详情](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})**
+
+          > ⚠️ **提示**：GitHub Actions Artifacts 需要登录 GitHub 账号后方可下载，且受仓库的保留期限限制（默认 90 天）。
+          EOF
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ steps.vars.outputs.tag_name }}
+          name: ${{ steps.vars.outputs.release_name }}
+          body_path: release_body.md
+          draft: false
+          prerelease: false
